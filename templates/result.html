@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Scan Results...</title>
+    <style>
+
+        h2 { 
+        
+            color: #000080;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        body {
+            font-family: Poppins, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        header {
+            background-color: #000080;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0,0,0.15);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #000080;
+            color: white;
+        }
+
+        .results-table{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .results-table th, .results-table td{
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .results-table th {
+            background-color: #000080;
+            color: white;
+        }
+        .results-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Port Scan Results</h1>
+    </header>
+
+    <main>
+        <h2>Results for IP: {{ip }}</h2>
+  
+        {% if open_ports %}
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Port Number</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for port in open_ports %}
+                        <tr>
+                            <td> {{ port }}</td>
+                            <td>Open</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No open ports found for {{ ip }}.</p>
+        {% endif %}
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/" style="display: inline-block; padding: 10px 20px; background-color: #000080; color: white;
+             text-decoration: none; border-radius: 4px;">Scan Another IP</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Ize's Port Scanner | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

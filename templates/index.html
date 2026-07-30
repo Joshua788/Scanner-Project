@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ize's Port Scanner</title>
+    <style>
+    
+    h2 { 
+        
+        color: #000080;
+        }
+
+     p {
+        font-size: 18px;
+        color: #000080;
+        font-family: Poppins, sans-serif;
+        }
+
+    body {
+        font-family: Poppins, sans-serif;
+	background-color: #f0f8ff;
+        color: #333;
+	margin: 0;
+	padding: 0;
+    }
+
+    
+    
+
+    header{
+	background-color: #000080;
+	color: white;
+	padding: 10px 0;
+	text-align: center;
+    }
+   
+    main{
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        color: #000080;
+    }
+
+    .input-container {
+	text-align: left;
+        margin-bottom: 20px;
+    }
+
+    input[type='text'], input[type="number"] {
+	padding: 12px;
+	width: 70%;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 16px;
+        display: block;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+	margin-top: 10px;
+    }
+
+    button{
+	padding: 12px 22px;
+	margin-top: 10px;
+	background-color: #000080;
+	border: none;
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+        font-size: 16px;
+        transition: background 0.3s ease-in-out;
+    }
+
+    button:hover {
+	background-color: #0033aa;
+    }
+
+    footer {
+	text-align: center;
+	margin-top: 40px;
+	padding: 15px;
+	background-color: #000080;
+	color: white;
+        font-size: 16px;
+    }
+
+    .error-message {
+	color: red;
+	text-align: center;
+    }
+
+    ul{
+	padding-left: 20px;
+    }
+
+    li{
+	color: red;
+    }
+
+
+    .descrption {
+	text-align: center;
+	margin-top: 10px;
+        max-width: 80%;
+        margin-left: auto;
+        margin: auto;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #000080;
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+	<h1>Ize's Port Scanner</h1>
+    </header>
+
+
+    <main>
+	<h2>Enter an IP Address to Scan</h2>
+	<form method="POST" action='/'>
+	    <div class="input-container">
+		<label for="ip">Target IP:</label>
+		<input type="text" name="ip" required><br>
+
+		<input type="checkbox" id="custom_range" name="custom_range" onclick="togglePortFields()">
+		<label for="custom_range">Use Custom Port Range</label><br>
+
+		<div id="portFields" style="display: none;">
+		    <label for="start_port">Start Port:</label>
+		    <input type="number" name="start_port" min="1" max="65535"><br>
+
+		    <label for="end_port">End Port:</label>
+		    <input type="number" name="end_port" min="1" max="65535"><br>
+		</div>
+
+		<button type="submit">Start Scan</button>
+	    </div>
+	</form>
+
+	<div class="descrption">
+	    <p>This tool scans the specified IP address to find open ports and identifies the services running on those ports.</p>
+            <p>If you'd like to scan a custom range of ports, check the box above and enter a start and end port (from 1 to 65535). Otherwise, the scanner will check the first 1000 ports by default.</p>
+        </div>
+
+	{% with messages = get_flashed_messages() %}
+	    {% if messages %}
+		<div class="error-message">
+		    <ul>
+			{% for messages in messages %}
+			    <li>{{ messages }}</li>
+			{% endfor %}
+		    </ul>
+		</div>
+            {% endif %}
+        {% endwith %}
+    </main>
+
+    <footer>
+	<p>© 2025 Ize's Port Scanner | All Rights Reserved</p>
+    </footer>
+
+    <script>
+	function togglePortFields() {
+	    var checkBox = document.getElementById("custom_range");
+	    var portFields = document.getElementById("portFields");
+	    if (checkBox.checked) {
+		portFields.style.display = "block";
+	    } else {
+		portFields.style.display = "none";
+	    }
+    }
+    </script>
+    </body>
+    </html>
+    
